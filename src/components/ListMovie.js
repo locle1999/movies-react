@@ -17,6 +17,7 @@ export default class ListMovie extends Component {
             let moviesCopy = [...movies]
             let ojbIndex = moviesCopy.findIndex(item => item.id === film.id)
             moviesCopy[ojbIndex].title = editFilm.title
+            moviesCopy[ojbIndex].releaseYear = editFilm.releaseYear
             this.setState({
                 movies: moviesCopy,
                 editFilm: {}
