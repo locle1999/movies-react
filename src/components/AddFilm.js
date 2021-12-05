@@ -6,28 +6,31 @@ export default class AddFilm extends Component {
         releaseYear: "",
     };
     handleChangeTitle = (event) => {
+        console.log('check', event)
         this.setState({
             title: event.target.value
         })
     }
     handleChangeYear = (event) => {
-        // let { title, releaseYear } = this.props
-        // console.log("chek year", releaseYear)
-        // if (releaseYear !== Number && releaseYear !== "") {
-        //     alert('releaseYear must is Number ')
-        //     return
-        // }
+
         this.setState({
             releaseYear: event.target.value
         })
     }
     onClickAddmovies = (film) => {
+        let { title, releaseYear } = this.state
+        let isEmptyOjb1 = Object.keys(title).length === 0;
+        let isEmptyOjb2 = Object.keys(releaseYear).length === 0;
         console.log(" check film ", this.state)
-        this.props.addFilm({
-            id: Math.floor(Math.random() * 100),
-            title: this.state.title,
-            releaseYear: this.state.releaseYear
-        })
+        if (((isEmptyOjb1 || isEmptyOjb2) === false)) {
+            this.props.addFilm({
+                id: Math.floor(Math.random() * 100),
+                title: this.state.title,
+                releaseYear: this.state.releaseYear
+            })
+        } else {
+            alert('must iput film and year')
+        }
         this.setState({
             title: "",
             releaseYear: ""

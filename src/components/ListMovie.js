@@ -29,9 +29,16 @@ export default class ListMovie extends Component {
         })
 
     }
-    handleChange = (event) => {
+    handleChangeTitle = (event) => {
         let copyEditFilm = { ...this.state.editFilm }
         copyEditFilm.title = event.target.value
+        this.setState({
+            editFilm: copyEditFilm
+        })
+    }
+    handleChangeYear = (event) => {
+        let copyEditFilm = { ...this.state.editFilm }
+        copyEditFilm.releaseYear = event.target.value
         this.setState({
             editFilm: copyEditFilm
         })
@@ -50,27 +57,31 @@ export default class ListMovie extends Component {
                             <th>Action</th>
                         </thead>
                         <tbody>
-
                             {movies.length > 0 && movies.map((film, i) => {
-                                return (<tr key={film.id}>
-                                    {isEmptyOjb === true ? <>
-                                        <td>{film.title}</td>
-                                        <td>{film.releaseYear}</td></>
-                                        :
-                                        <>{editFilm.id === film.id ?
-                                            <span>
-                                                <input onChange={(event) => { this.handleChange(event) }} value={editFilm.title} />
-                                            </span>
+                                return (
+                                    <tr key={film.id}>
+                                        {isEmptyOjb === true ?
+                                            <>
+                                                <td>{film.title}</td>
+                                                <td>{film.releaseYear}</td>
+                                            </>
                                             :
-                                            <span> {film.title}</span>
+                                            <>{
+                                                editFilm.id === film.id ?
+                                                    <span>
+                                                        <input onChange={(event) => { this.handleChangeTitle(event) }} value={editFilm.title} />
+                                                        <input onChange={(event) => { this.handleChangeYear(event) }} value={editFilm.releaseYear} />
+                                                    </span>
+                                                    :
+                                                    <span> {film.title}</span>
+                                            }
+                                            </>
                                         }
-                                        </>
-                                    }
-                                    <td><button onClick={() => this.handleEditFilm(film)}>
-                                        {isEmptyOjb === false && editFilm.id === film.id ? "Save" : "Edit"}
-                                    </button></td>
-                                    <td><button onClick={() => { this.handleDelete(film) }}>Delete</button></td>
-                                </tr>
+                                        <td><button onClick={() => this.handleEditFilm(film)}>
+                                            {isEmptyOjb === false && editFilm.id === film.id ? "Save" : "Edit"}
+                                        </button></td>
+                                        <td><button onClick={() => { this.handleDelete(film) }}>Delete</button></td>
+                                    </tr>
                                 )
                             })}
 

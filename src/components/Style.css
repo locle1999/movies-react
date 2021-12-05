@@ -18,8 +18,10 @@ body{
     margin-top: 2rem;
 }
 .ListFilm{
-    margin-top: 2rem;
-    margin-left:30% ;
+    margin-top: 1rem    ;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 .ListFilm table   {
     
